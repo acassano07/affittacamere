@@ -1,0 +1,2 @@
+name,phone,email,notes,customerType,checkInDate,checkOutDate,touristTaxStatus,status,guestsPerRoom,assignedRooms,id,price,touristTax
+Alessio Pio Cassano,3662297972,cassano.alessiopio@gmail.com,,Privato,2025-07-19T22:00:00.000Z,2025-07-20T22:00:00.000Z,Normale,Confirmed,[object Object],"[{""roomId"":1,""guestsAdults"":2,""guestsChildren"":1}]",2025-07-20T18:38:43.948Z-0.6231291594364724,0,0

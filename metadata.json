@@ -1,0 +1,5 @@
+{
+  "name": "Booking Management System",
+  "description": "A simple booking management system to handle reservations, view analytics, and manage settings.",
+  "requestFramePermissions": []
+}
