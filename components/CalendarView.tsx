@@ -101,23 +101,23 @@ const CalendarView: React.FC<CalendarViewProps> = ({ bookings, closures, onSelec
   const today = new Date();
 
   return (
-    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg h-full flex flex-col">
+    <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg dark:shadow-xl h-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 capitalize">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 capitalize">
           {headerText}
         </h2>
         <div className="flex items-center space-x-2">
-          <button onClick={() => navigate('prev')} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-            <ChevronLeft className="h-6 w-6 text-gray-600" />
+          <button onClick={() => navigate('prev')} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-gray-300" />
           </button>
           <button 
             onClick={() => setCurrentDate(new Date())} 
-            className="text-sm font-semibold text-blue-600 px-4 py-2 rounded-md hover:bg-blue-100 transition-colors"
+            className="text-sm font-semibold text-blue-600 dark:text-blue-400 px-4 py-2 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
           >
             Oggi
           </button>
-          <button onClick={() => navigate('next')} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-            <ChevronRight className="h-6 w-6 text-gray-600" />
+          <button onClick={() => navigate('next')} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+            <ChevronRight className="h-6 w-6 text-gray-600 dark:text-gray-300" />
           </button>
         </div>
       </div>
@@ -125,26 +125,26 @@ const CalendarView: React.FC<CalendarViewProps> = ({ bookings, closures, onSelec
       <div className="flex justify-center mb-4 space-x-2">
         <button 
           onClick={() => setViewMode('daily')}
-          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'daily' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'daily' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
         >
           Giorno
         </button>
         <button 
           onClick={() => setViewMode('weekly')}
-          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'weekly' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'weekly' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
         >
           Settimana
         </button>
         <button 
           onClick={() => setViewMode('monthly')}
-          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'monthly' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+          className={`px-4 py-2 rounded-md text-sm font-medium ${viewMode === 'monthly' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
         >
           Mese
         </button>
       </div>
       
       {viewMode !== 'daily' && (
-        <div className="grid grid-cols-7 text-center font-semibold text-gray-500 text-sm pb-2 border-b">
+        <div className="grid grid-cols-7 text-center font-semibold text-gray-500 dark:text-gray-400 text-sm pb-2 border-b dark:border-gray-700">
           {['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'].map(day => (
             <div key={day} className="py-2">{day}</div>
           ))}
@@ -172,10 +172,10 @@ const CalendarView: React.FC<CalendarViewProps> = ({ bookings, closures, onSelec
             <div
               key={day.toString()}
               onClick={() => onSelectDate(day)}
-              className={`border border-gray-200 p-1.5 flex flex-col relative ${viewMode === 'daily' ? 'min-h-[600px]' : 'min-h-[120px]'} cursor-pointer transition-colors hover:bg-blue-50 ${viewMode === 'monthly' && !isDayInCurrentMonth ? 'bg-gray-50' : 'bg-white'}`}
+              className={`border border-gray-200 dark:border-gray-700 p-1.5 flex flex-col relative ${viewMode === 'daily' ? 'min-h-[600px]' : 'min-h-[120px]'} cursor-pointer transition-colors hover:bg-blue-50 dark:hover:bg-blue-900 ${viewMode === 'monthly' && !isDayInCurrentMonth ? 'bg-gray-50 dark:bg-gray-800' : 'bg-white dark:bg-gray-900'}`}
             >
               <span className={`text-xs sm:text-sm font-medium mb-1 self-start ${
-                  isToday ? 'bg-blue-600 text-white rounded-full h-6 w-6 flex items-center justify-center' : 'text-gray-700'
+                  isToday ? 'bg-blue-600 text-white rounded-full h-6 w-6 flex items-center justify-center' : 'text-gray-700 dark:text-gray-300'
               }`}>
                 {dateFns.format(day, 'd')}
               </span>
@@ -188,7 +188,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ bookings, closures, onSelec
                   />
                 ))}
                 {dayClosures.map(closure => (
-                  <div key={closure.id} className="bg-gray-200 text-gray-600 p-1.5 rounded-lg text-xs border-l-4 border-gray-400">
+                  <div key={closure.id} className="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 p-1.5 rounded-lg text-xs border-l-4 border-gray-400 dark:border-gray-500">
                     <div className="font-bold">Chiuso</div>
                     <div className="truncate">{closure.roomId === 'all' ? 'Tutta la struttura' : ROOMS.find(r => r.id === closure.roomId)?.name}</div>
                   </div>

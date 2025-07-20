@@ -138,98 +138,98 @@ export default function BookingModal({ isOpen, onClose, booking, defaultDate }: 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-full overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-2xl w-full max-w-2xl max-h-full overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-800">{booking ? 'Modifica Prenotazione' : 'Nuova Prenotazione'}</h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-800"><X size={24} /></button>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{booking ? 'Modifica Prenotazione' : 'Nuova Prenotazione'}</h2>
+            <button onClick={onClose} className="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-100"><X size={24} /></button>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Form Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Nome Cliente</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nome Cliente</label>
                     <div className="mt-1 relative rounded-md shadow-sm">
                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <User className="h-5 w-5 text-gray-400" />
                         </div>
-                        <input type="text" name="name" value={formData.name} onChange={handleChange} className="block w-full rounded-md border-gray-300 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Mario Rossi" required/>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} className="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Mario Rossi" required/>
                     </div>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Telefono {formData.customerType === 'Booking.com' && '(Opzionale)'}</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Telefono {formData.customerType === 'Booking.com' && '(Opzionale)'}</label>
                      <div className="mt-1 relative rounded-md shadow-sm">
                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <Phone className="h-5 w-5 text-gray-400" />
                         </div>
-                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="block w-full rounded-md border-gray-300 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="3331234567" required={formData.customerType !== 'Booking.com'}/>
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="3331234567" required={formData.customerType !== 'Booking.com'}/>
                     </div>
                 </div>
                 <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Email (Opzionale)</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email (Opzionale)</label>
                     <div className="mt-1 relative rounded-md shadow-sm">
                          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <Mail className="h-5 w-5 text-gray-400" />
                         </div>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="block w-full rounded-md border-gray-300 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="mario.rossi@email.com"/>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 pl-10 focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="mario.rossi@email.com"/>
                     </div>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Check-in</label>
-                    <input type="date" name="checkInDate" value={formData.checkInDate} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"/>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Check-in</label>
+                    <input type="date" name="checkInDate" value={formData.checkInDate} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"/>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Check-out</label>
-                    <input type="date" name="checkOutDate" value={formData.checkOutDate} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"/>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Check-out</label>
+                    <input type="date" name="checkOutDate" value={formData.checkOutDate} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"/>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Tipo Cliente</label>
-                    <select name="customerType" value={formData.customerType} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Tipo Cliente</label>
+                    <select name="customerType" value={formData.customerType} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
                         {CUSTOMER_TYPES.map(type => <option key={type} value={type}>{type}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Tassa Soggiorno</label>
-                    <select name="touristTaxStatus" value={formData.touristTaxStatus} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Tassa Soggiorno</label>
+                    <select name="touristTaxStatus" value={formData.touristTaxStatus} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
                          {TOURIST_TAX_STATUSES.map(status => <option key={status} value={status}>{status}</option>)}
                     </select>
                 </div>
                 <div className="md:col-span-2">
-                     <label className="block text-sm font-medium text-gray-700">Note (Opzionale)</label>
-                     <textarea name="notes" value={formData.notes} onChange={handleChange} rows={3} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"></textarea>
+                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Note (Opzionale)</label>
+                     <textarea name="notes" value={formData.notes} onChange={handleChange} rows={3} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2"></textarea>
                 </div>
             </div>
 
             {/* Room Distribution */}
-            <div className="bg-gray-50 p-4 rounded-lg space-y-3">
-              <h3 className="font-semibold text-lg text-gray-800">Distribuzione Ospiti</h3>
+            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-3">
+              <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">Distribuzione Ospiti</h3>
               {roomDistribution.map((room, index) => (
-                <div key={index} className="p-2 border border-gray-200 rounded-md">
+                <div key={index} className="p-2 border border-gray-200 dark:border-gray-600 rounded-md">
                   <div className="flex items-center justify-between">
-                     <p className="font-semibold text-gray-700">Camera {index + 1}</p>
+                     <p className="font-semibold text-gray-700 dark:text-gray-300">Camera {index + 1}</p>
                      <button type="button" onClick={() => removeRoom(index)} className="text-red-500 hover:text-red-700">
                         <Minus size={16} />
                       </button>
                   </div>
                   <div className="flex items-center gap-4 mt-2">
                     <div>
-                      <label className="block text-xs font-medium text-gray-600">Adulti</label>
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400">Adulti</label>
                       <input 
                         type="number" 
                         value={room.guestsAdults}
                         onChange={(e) => handleRoomDistChange(index, 'guestsAdults', e.target.value)}
                         min="0"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 mt-1"
+                        className="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 mt-1"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-gray-600">Bambini (&lt;12)</label>
+                      <label className="block text-xs font-medium text-gray-600 dark:text-gray-400">Bambini (&lt;12)</label>
                       <input 
                         type="number" 
                         value={room.guestsChildren}
                         onChange={(e) => handleRoomDistChange(index, 'guestsChildren', e.target.value)}
                         min="0"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 mt-1"
+                        className="block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 mt-1"
                       />
                     </div>
                   </div>
@@ -238,28 +238,28 @@ export default function BookingModal({ isOpen, onClose, booking, defaultDate }: 
               <button type="button" onClick={addRoom} className="text-blue-600 hover:text-blue-800 flex items-center text-sm font-semibold">
                 <Plus size={16} className="mr-1" /> Aggiungi Camera
               </button>
-              <p className="text-sm font-bold text-gray-800 mt-2">Ospiti totali: {roomDistribution.reduce((sum, room) => sum + room.guestsAdults + room.guestsChildren, 0)}</p>
+              <p className="text-sm font-bold text-gray-800 dark:text-gray-100 mt-2">Ospiti totali: {roomDistribution.reduce((sum, room) => sum + room.guestsAdults + room.guestsChildren, 0)}</p>
             </div>
 
             {/* Price Preview */}
-            <div className="bg-gray-50 p-4 rounded-lg space-y-2">
-                <h3 className="font-semibold text-lg text-gray-800">Preventivo</h3>
-                <div className="flex justify-between items-center text-gray-600">
+            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-2">
+                <h3 className="font-semibold text-lg text-gray-800 dark:text-gray-100">Preventivo</h3>
+                <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
                     <span className="flex items-center"><Euro className="w-4 h-4 mr-2"/>Prezzo Soggiorno</span>
-                    <span className="font-bold text-gray-800">{formData.customerType === 'Privato' ? `${calculatedPrice.toFixed(2)} €` : 'N/A'}</span>
+                    <span className="font-bold text-gray-800 dark:text-gray-100">{formData.customerType === 'Privato' ? `${calculatedPrice.toFixed(2)} €` : 'N/A'}</span>
                 </div>
-                <div className="flex justify-between items-center text-gray-600">
+                <div className="flex justify-between items-center text-gray-600 dark:text-gray-300">
                     <span className="flex items-center"><CalendarIcon className="w-4 h-4 mr-2"/>Tassa di Soggiorno</span>
-                    <span className="font-bold text-gray-800">{calculatedTax.toFixed(2)} €</span>
+                    <span className="font-bold text-gray-800 dark:text-gray-100">{calculatedTax.toFixed(2)} €</span>
                 </div>
-                 <p className="text-xs text-gray-500">La tassa di soggiorno si applica solo agli adulti. I bambini sotto i 12 anni sono esenti.</p>
-                <div className="border-t pt-2 mt-2 flex justify-between items-center text-lg font-bold text-blue-600">
+                 <p className="text-xs text-gray-500 dark:text-gray-400">La tassa di soggiorno si applica solo agli adulti. I bambini sotto i 12 anni sono esenti.</p>
+                <div className="border-t dark:border-gray-600 pt-2 mt-2 flex justify-between items-center text-lg font-bold text-blue-600 dark:text-blue-400">
                     <span>Totale</span>
                     <span>{ (formData.customerType === 'Privato' ? calculatedPrice + calculatedTax : calculatedTax).toFixed(2) } €</span>
                 </div>
             </div>
             
-            <div className="flex justify-between items-center pt-4 border-t mt-4">
+            <div className="flex justify-between items-center pt-4 border-t dark:border-gray-700 mt-4">
               <div>
                 {booking && (
                   <button 
@@ -273,7 +273,7 @@ export default function BookingModal({ isOpen, onClose, booking, defaultDate }: 
                 )}
               </div>
               <div className="flex space-x-2">
-                <button type="button" onClick={onClose} className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300">Annulla</button>
+                <button type="button" onClick={onClose} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600">Annulla</button>
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">{booking ? 'Salva Modifiche' : 'Crea Prenotazione'}</button>
               </div>
             </div>

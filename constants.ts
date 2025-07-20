@@ -1,21 +1,39 @@
-import { Room } from './types';
+import { Country, State, DocumentType } from './types';
 
-export const ROOMS: Room[] = [
-  { id: 1, name: 'Camera 1', capacity: 3 },
-  { id: 2, name: 'Camera 2', capacity: 3 },
-  { id: 3, name: 'Camera 3', capacity: 4 },
-  { id: 4, name: 'Camera 4', capacity: 2 },
-  { id: 5, name: 'Camera 5', capacity: 4 },
-  { id: 6, name: 'Camera 6', capacity: 3 },
+export const COUNTRIES: Country[] = [
+  { id: 1, name: 'Italy', iso2: 'IT' },
+  { id: 2, name: 'United States', iso2: 'US' },
+  { id: 3, name: 'Germany', iso2: 'DE' },
 ];
 
-// Ordine preferito per assegnazione camere
-export const ROOM_PREFERENCES: { [key: number]: number[] } = {
-  1: [2, 1, 4, 5, 6, 3], // Singola
-  2: [1, 2, 4, 5, 6, 3], // Matrimoniale
-  3: [3, 5, 6, 1, 2],    // Tripla
-  4: [3, 5],             // Quadrupla
-};
+export const STATES: State[] = [
+  { id: 1, name: 'Lombardy', iso2: 'LM' },
+  { id: 2, name: 'California', iso2: 'CA' },
+  { id: 3, name: 'Bavaria', iso2: 'BY' },
+];
 
-export const CUSTOMER_TYPES = ['Privato', 'Booking.com'];
-export const TOURIST_TAX_STATUSES = ['Normale', 'Esenzione'];
+export const DOCUMENT_TYPES: DocumentType[] = [
+  "Carta d'Identità",
+  "Passaporto",
+  "Patente di Guida",
+  "Altro",
+];
+
+export const ROOMS = [
+  { id: 1, name: 'Room 1', capacity: 3 },
+  { id: 2, name: 'Room 2', capacity: 3 },
+  { id: 3, name: 'Room 3', capacity: 4 },
+  { id: 4, name: 'Room 4', capacity: 2 },
+  { id: 5, name: 'Room 5', capacity: 4 },
+  { id: 6, name: 'Room 6', capacity: 3 },
+];
+
+export const CUSTOMER_TYPES = [
+  'Privato',
+  'Booking.com',
+];
+
+export const TOURIST_TAX_STATUSES = [
+  'Normale',
+  'Esenzione',
+];

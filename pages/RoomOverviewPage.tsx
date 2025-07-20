@@ -43,14 +43,14 @@ const RoomOverviewPage: React.FC = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 dark:bg-gray-900">
       <div className="flex justify-between items-center mb-4">
-        <button onClick={() => navigateDay('prev')} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-          <ChevronLeft className="h-6 w-6 text-gray-600" />
+        <button onClick={() => navigateDay('prev')} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+          <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-gray-300" />
         </button>
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Panoramica Camere - {dateFns.format(currentDate, 'dd/MM/yyyy')}</h1>
-        <button onClick={() => navigateDay('next')} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-          <ChevronRight className="h-6 w-6 text-gray-600" />
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100">Panoramica Camere - {dateFns.format(currentDate, 'dd/MM/yyyy')}</h1>
+        <button onClick={() => navigateDay('next')} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+          <ChevronRight className="h-6 w-6 text-gray-600 dark:text-gray-300" />
         </button>
       </div>
 
@@ -58,35 +58,35 @@ const RoomOverviewPage: React.FC = () => {
         {ROOMS.sort((a, b) => a.id - b.id).map(room => {
           const status = getRoomStatus(room.id);
           
-          let cardClass = 'bg-white';
+          let cardClass = 'bg-white dark:bg-gray-800';
           let statusText = 'Disponibile';
           let content = null;
 
           if (status.status === 'occupied') {
-            cardClass = 'bg-red-100 border-red-400';
+            cardClass = 'bg-red-100 dark:bg-red-900 border-red-400 dark:border-red-700';
             statusText = 'Occupata';
             content = (
-              <div className="text-sm text-gray-700 mt-2">
+              <div className="text-sm text-gray-700 dark:text-gray-300 mt-2">
                 <p className="font-semibold">{status.booking?.name}</p>
                 <p className="flex items-center"><User size={14} className="mr-1" /> {status.guestsAdults} Adulti, {status.guestsChildren} Bambini</p>
                 <p className="flex items-center"><Calendar size={14} className="mr-1" /> {dateFns.format(dateFns.parseISO(status.booking?.checkInDate || ''), 'dd/MM')} - {dateFns.format(dateFns.parseISO(status.booking?.checkOutDate || ''), 'dd/MM')}</p>
               </div>
             );
           } else if (status.status === 'closed') {
-            cardClass = 'bg-gray-100 border-gray-400';
+            cardClass = 'bg-gray-100 dark:bg-gray-700 border-gray-400 dark:border-gray-600';
             statusText = 'Chiusa';
             content = (
-              <p className="text-sm text-gray-700 mt-2">Motivo: {status.closure?.reason}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">Motivo: {status.closure?.reason}</p>
             );
           }
 
           return (
-            <div key={room.id} className={`p-4 rounded-lg shadow-md border-l-4 ${cardClass}`}>
+            <div key={room.id} className={`p-4 rounded-lg shadow-md border-l-4 dark:text-gray-100 ${cardClass}`}>
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
                   <BedDouble className="mr-2" /> {room.name}
                 </h2>
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${status.status === 'available' ? 'bg-green-200 text-green-800' : status.status === 'occupied' ? 'bg-red-200 text-red-800' : 'bg-gray-200 text-gray-800'}`}>
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${status.status === 'available' ? 'bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200' : status.status === 'occupied' ? 'bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200' : 'bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200'}`}>
                   {statusText}
                 </span>
               </div>

@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { Booking, Settings, Closure } from '../types';
 import { findBestRoomsForDistribution } from '../utils/bookingUtils';
 import * as dateFns from 'date-fns';
-import Papa from 'papaparse';
 
 interface DataContextType {
   bookings: Booking[];
@@ -20,7 +19,14 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [bookings, setBookings] = useState<Booking[]>(() => {
+    const savedBookings = localStorage.getItem('bookings');
+    try {
+      return savedBookings ? JSON.parse(savedBookings) : [];
+    } catch {
+      return [];
+    }
+  });
   const [settings, setSettings] = useState<Settings>(() => {
     const savedSettings = localStorage.getItem('settings');
     try {
@@ -51,32 +57,8 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await fetch('/bookings.csv');
-        const text = await response.text();
-        Papa.parse(text, {
-          header: true,
-          skipEmptyLines: true,
-          dynamicTyping: false,
-          complete: (results) => {
-            const parsedBookings = results.data.map((row: any) => ({
-              ...row,
-              guestsAdults: Number(row.guestsAdults) || 0,
-              guestsChildren: Number(row.guestsChildren) || 0,
-              price: Number(row.price) || 0,
-              touristTax: Number(row.touristTax) || 0,
-              assignedRooms: row.assignedRooms ? JSON.parse(row.assignedRooms) : [],
-            })) as Booking[];
-            setBookings(parsedBookings);
-          }
-        });
-      } catch (error) {
-        console.error('Failed to fetch bookings:', error);
-      }
-    };
-    fetchBookings();
-  }, []);
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+  }, [bookings]);
 
   useEffect(() => {
     localStorage.setItem('settings', JSON.stringify(settings));
@@ -85,26 +67,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     localStorage.setItem('closures', JSON.stringify(closures));
   }, [closures]);
-
-  const updateBookingsCSV = async (updatedBookings: Booking[]) => {
-    try {
-      const csv = Papa.unparse(updatedBookings.map(b => ({
-        ...b,
-        assignedRooms: JSON.stringify(b.assignedRooms)
-      })));
-      console.log("CSV data being sent:", csv); // Added for debugging
-      await fetch('/bookings.csv', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'text/plain',
-        },
-        body: csv,
-      });
-      setBookings(updatedBookings);
-    } catch (error) {
-      console.error('Failed to update bookings:', error);
-    }
-  };
 
   const addBooking = (bookingData: Omit<Booking, 'id' | 'price' | 'touristTax' | 'assignedRooms'> & { guestsPerRoom: { guestsAdults: number, guestsChildren: number }[] }) => {
     const assignedRooms = findBestRoomsForDistribution(bookingData.guestsPerRoom, bookingData.checkInDate, bookingData.checkOutDate, bookings, closures);
@@ -121,7 +83,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       touristTax: 0,
     };
     const updatedBookings = [...bookings, newBooking].sort((a,b) => dateFns.parseISO(a.checkInDate).getTime() - dateFns.parseISO(b.checkInDate).getTime());
-    updateBookingsCSV(updatedBookings);
+    setBookings(updatedBookings);
     return { success: true, message: 'Prenotazione aggiunta con successo!' };
   };
 
@@ -133,13 +95,13 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
 
     const updatedBookings = bookings.map(b => b.id === bookingData.id ? { ...b, ...bookingData, assignedRooms } : b).sort((a,b) => dateFns.parseISO(a.checkInDate).getTime() - dateFns.parseISO(b.checkInDate).getTime());
-    updateBookingsCSV(updatedBookings);
+    setBookings(updatedBookings);
     return { success: true, message: 'Prenotazione aggiornata!' };
   };
 
   const deleteBooking = (id: string) => {
     const updatedBookings = bookings.filter(b => b.id !== id);
-    updateBookingsCSV(updatedBookings);
+    setBookings(updatedBookings);
   };
   
   const getBookingById = (id: string) => {

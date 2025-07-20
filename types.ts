@@ -13,23 +13,60 @@ export interface AssignedRoom {
   guestsChildren: number;
 }
 
+export interface Guest {
+  id: string; // Unique ID for the guest
+  firstName: string;
+  lastName: string;
+  isMainGuest: boolean; // To distinguish main guest from others
+  guestType?: string; // e.g., "Adult", "Child"
+  dateOfBirth?: string; // ISO string or 'dd/MM/yyyy'
+  gender?: string; // e.g., "M", "F"
+  nationality?: string;
+  placeOfBirthType?: 'Comune' | 'Stato';
+  placeOfBirth?: string;
+  residenceType?: 'Comune' | 'Stato';
+  residence?: string;
+  documentType?: DocumentType;
+  documentNumber?: string;
+  documentIssueType?: 'Comune' | 'Nazione';
+  documentIssuePlace?: string;
+  address?: string;
+  city?: string;
+  province?: string;
+  country?: string;
+  postalCode?: string;
+  email?: string;
+  phone?: string;
+  notes?: string;
+  countryOfBirth?: Country;
+  stateOfBirth?: State;
+  countryOfResidence?: Country;
+  stateOfResidence?: State;
+}
+
 export interface Booking {
   id: string;
-  name: string;
-  phone: string;
-  email?: string;
-  notes?: string;
-  customerType: CustomerType;
-  checkInDate: string; // ISO string
-  checkOutDate: string; // ISO string
-  guestsAdults: number;
-  guestsChildren: number;
-  assignedRooms: AssignedRoom[];
-  price: number;
-  touristTax: number;
-  touristTaxStatus: TouristTaxStatus;
-  status: 'Confirmed' | 'CheckedIn';
+  guestName: string;
+  roomNumber: string;
+  checkInDate: string;
+  checkOutDate: string;
+  status: 'confirmed' | 'pending' | 'cancelled';
 }
+
+export interface Country {
+  id: number;
+  name: string;
+  iso2: string;
+}
+
+export interface State {
+  id: number;
+  name: string;
+  iso2: string;
+}
+
+export type DocumentType = 'Carta d'Identità' | 'Passaporto' | 'Patente di Guida' | 'Altro';
+
 
 export interface Settings {
   basePriceDoubleRoom: number;
